@@ -1,0 +1,26 @@
+
+h1{
+   font-size: 200%; 
+   color: blue;
+ }
+ h2{
+   font-size: 100%; 
+   color: blue;
+ }
+ span{
+   font-style: italic;
+ }
+ .container{
+   display: flex;
+   justify-content: space-around;
+ }
+ .box{
+   height: 50%;
+   width: 25%;
+   background-color: aquamarine;
+   border: 1px solid blue;
+ }
+ footer{
+   margin-top: 10px;
+   clear: both;
+ }
