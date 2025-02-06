@@ -1,10 +1,7 @@
 
-h1{
-   font-size: 200%; 
-   color: blue;
- }
  h2{
-   font-size: 100%; 
+   font-size: 100%;
+   font-style: oblique;  
    color: blue;
  }
  span{
@@ -24,3 +21,18 @@ h1{
    margin-top: 10px;
    clear: both;
  }
+ #home{
+  font-size: 200%; 
+  color: rgb(42, 165, 52);
+}
+#about{
+  font-size: 200%; 
+  color: blue;
+}
+#projects{
+  font-size: 200%;
+  color: rgb(255, 0, 179);
+}
+li{
+  font-size: 120%;
+}
