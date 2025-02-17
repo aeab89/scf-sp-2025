@@ -20,7 +20,7 @@ function SayHi(){
 
 function colorOfBlood(){
 let color = document.getElementById("Color").value;
-if(color == "red" || "Red"){
+if(color == "red" || color == "Red"){
     alert("You are correct!");
 } else{
     alert("That is incorrect. Try again!");
