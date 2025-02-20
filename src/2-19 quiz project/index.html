@@ -4,25 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Game</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
     <h1>Quiz Game</h1>
-    <div id="QuestionContainer">
-        <h2 id="Question"></h2>
-        <ul id="Answers">
-
-        </ul>
-    </div>
-    <!--Stat Screen-->
+        <!-- Start Screen -->
     <div id="StartScreen">
         <h2>Wecome to the Quiz!</h2>
-        <button onclick="startQuiz()">Start</button> <!--calls on startQuiz function-->
+        <button onclick="startQuiz()">Start</button> <!-- calls on startQuiz() function -->
+    </div>
+    <!-- Quiz Screen -->
+    <div id="QuizScreen">
+        <div id="QuestionContainer">
+            <h2 id="Question"></h2>
+            <ul id="Answers">
+
+            </ul>
+        </div>
     </div>
     <!--Game Over Screen-->
     <div id="GameOverScreen">
         <h2>Game Over!</h2>
         <p>Your final score is: <span id="FinalScore"></span></p>
-        <button onclick="restartQuiz()">Play Again</button>
+        <button onclick="restartQuiz()">Play Again</button> <!-- calls on restartQuiz() function -->
     </div>
     <script type="text/javascript" src="./script.js"></script>
 </body>

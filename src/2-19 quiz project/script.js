@@ -1,5 +1,9 @@
 const questionElement = document.getElementById("Question");
 const answersElement = document.getElementById("Answers");
+const startScreen = document.getElementById("StartScreen");
+const quizScreen = document.getElementById("QuizScreen");
+const gameOverScreen = document.getElementById("GameOverScreen");
+const finalScoreElement = document.getElementById("FinalScore");
 
 let questions = [
     "What color is the sky?",
@@ -19,7 +23,31 @@ let correctAnswerIndexes = [
 ];
 let currentQuestionIndex = 0;
 
-function setupQuestion(){
+function setupQuestion() {
+    //Updated so it displays the Game Over Screen when the quiz ends.
+    if (currentQuestionIndex >= questions.length) {
+        let finalScore = answerScores.reduce((total, score) => total + (score || 0), 0);
+        finalScoreElement.innerHTML = finalScore;
+        quizScreen.style.display = "none";
+        gameOverScreen.style.display = "block";
+        return;
+    }
+    questionElement.innerHTML = questions[currentQuestionIndex];
+    answersElement.innerHTML = "";
+    possibleAnswers[currentQuestionIndex].forEach(element => {
+    let thisAnswer = document.createElement("li");
+    thisAnswer.innerHTML = element;
+    thisAnswer.onclick = (event) => {
+    if(event.target.innerHTML == correctAnswerIndexes[currentQuestionIndex]){
+    answerScores[currentQuestionIndex] = 1;
+    }
+    currentQuestionIndex++;
+    setupQuestion();
+    };
+    answersElement.appendChild(thisAnswer);
+    });
+    }
+/*function setupQuestion(){
     //Only move on if index exists, otherwise return 
     if(currentQuestionIndex > questions.length - 1){
         let finalScore = 0;
@@ -49,7 +77,18 @@ function setupQuestion(){
         };
         answersElement.appendChild(thisAnswer);
     });
+}*/
+
+function startQuiz() {
+    startScreen.style.display = "none";
+    gameOverScreen.style.display = "none";
+    quizScreen.style.display = "block";
+    currentQuestionIndex = 0;
+    answerScores = new Array (questions.length).fill(0);
+    setupQuestion();
 }
-setupQuestion();
 
-
+function restartQuiz() {
+    gameOverScreen.style.display = "none";
+    startScreen.style.display = "block";
+}
