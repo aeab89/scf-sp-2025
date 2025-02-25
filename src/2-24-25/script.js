@@ -78,16 +78,23 @@ searchCarElement.addEventListener("click", (event) => {
     event.preventDefault();
 
     let searchValue = document.getElementById("CarInput").value.trim().toLowerCase();
-    let foundVehicle = vehicles.filter(vehicles => vehicles.make.toLowerCase() === searchValue);
+    let foundVehicles = vehicles.filter(vehicle => vehicle.make.toLowerCase() === searchValue);
     let resultDisplay = document.getElementById("ResultDisplay");
 
-if (foundVehicle) {
-    resultDisplay.innerText =
-    `Model: ${foundVehicle.model}\n` +
-    `Type: ${foundVehicle.type}\n` +
-    `Color: ${foundVehicle.color}\n` +
-    `Tires: ${foundVehicle.tire}\n`;
-} else{
-    resultDisplay.innerText = "No vehicle with that make."
-}
+    if (foundVehicles.length > 0) {
+        resultDisplay.innerHTML = "";
+
+        foundVehicles.forEach(vehicle => {
+            let vehicleInfo = document.createElement("p");
+            vehicleInfo.innerText =
+                `Model: ${vehicle.model}\n` +
+                `Type: ${vehicle.type}\n` +
+                `Color: ${vehicle.color}\n` +
+                `Tires: ${vehicle.tire}\n` +
+                '---------------------------------';
+            resultDisplay.appendChild(vehicleInfo);
+        });
+    } else{
+        resultDisplay.innerText = "No vehicle with that make.";
+    }
 });
