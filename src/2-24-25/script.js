@@ -50,6 +50,7 @@ let vehicles = [
 const carSelectorElement = document.getElementById("CarSelector");
 carSelectorElement.innerHTML = "";
 
+const carInfoDisplay = document.getElementById("CarInfo")
 const makeModelDisplay = document.getElementById("MakeModel");
 const carDetailDisplay = document.getElementById("CarDetails");
 
@@ -75,6 +76,7 @@ carSelectorElement.addEventListener("change", (event) => {
 const searchCarElement = document.getElementById("SearchButton");
 
 searchCarElement.addEventListener("click", (event) => {
+    carInfoDisplay.innerHTML = "";
     event.preventDefault();
 
     let searchValue = document.getElementById("CarInput").value.trim().toLowerCase();
