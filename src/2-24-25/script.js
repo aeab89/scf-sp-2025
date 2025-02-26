@@ -53,6 +53,9 @@ carSelectorElement.innerHTML = "";
 const carInfoDisplay = document.getElementById("CarInfo")
 const makeModelDisplay = document.getElementById("MakeModel");
 const carDetailDisplay = document.getElementById("CarDetails");
+const searchCarElement = document.getElementById("SearchButton");
+const resultDisplay = document.getElementById("ResultDisplay");
+
 
 for(i = 0; i < vehicles.length; i++){
     let option = document.createElement("option");
@@ -62,41 +65,57 @@ for(i = 0; i < vehicles.length; i++){
     carSelectorElement.appendChild(option);
 }
 
-
+/* How I originally had the code for the carSelectorElement before chatGPT's suggestions.
 carSelectorElement.addEventListener("change", (event) => {
+    resultDisplay.innerHTML = "";
+
     let message = vehicles[event.target.value].make + " " + vehicles[event.target.value].model;
     makeModelDisplay.innerText = message;
+
     let listItems = 
         "Type: " + vehicles[event.target.value].type + "\n" +
         "Color: " + vehicles[event.target.value].color + "\n" +
         "Tire: " + vehicles[event.target.value].tire + "\n";
     carDetailDisplay.innerText = listItems;    
+});*/
+
+carSelectorElement.addEventListener("change", (event) => {
+    resultDisplay.innerHTML = "";
+    let selectedIndex = event.target.value;
+    let selectedVehicle = vehicles[selectedIndex];
+
+    if (selectedVehicle) {
+        carDetailDisplay.innerText =
+            `Make: ${selectedVehicle.make}\n` +
+            `Model: ${selectedVehicle.model}\n` +
+            `Type: ${selectedVehicle.type}\n` +
+            `Color: ${selectedVehicle.color}\n` +
+            `Tire: ${selectedVehicle.tire}\n`;
+    } 
 });
 
-const searchCarElement = document.getElementById("SearchButton");
-
 searchCarElement.addEventListener("click", (event) => {
-    carInfoDisplay.innerHTML = "";
     event.preventDefault();
-
+    
     let searchValue = document.getElementById("CarInput").value.trim().toLowerCase();
     let foundVehicles = vehicles.filter(vehicle => vehicle.make.toLowerCase() === searchValue);
-    let resultDisplay = document.getElementById("ResultDisplay");
 
     if (foundVehicles.length > 0) {
         resultDisplay.innerHTML = "";
 
-        foundVehicles.forEach(vehicle => {
+        foundVehicles.forEach((vehicle) => {
             let vehicleInfo = document.createElement("p");
             vehicleInfo.innerText =
+                `Make: ${vehicle.make}\n` +
                 `Model: ${vehicle.model}\n` +
                 `Type: ${vehicle.type}\n` +
                 `Color: ${vehicle.color}\n` +
-                `Tires: ${vehicle.tire}\n` +
-                '---------------------------------';
+                `Tire: ${vehicle.tire}\n` +
+                '---------------------------';
             resultDisplay.appendChild(vehicleInfo);
         });
     } else{
+        carInfoDisplay.innerHTML = "";
         resultDisplay.innerText = "No vehicle with that make.";
     }
 });
