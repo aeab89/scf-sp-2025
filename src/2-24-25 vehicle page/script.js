@@ -50,8 +50,6 @@ let vehicles = [
 const carSelectorElement = document.getElementById("CarSelector");
 carSelectorElement.innerHTML = "";
 
-const carInfoDisplay = document.getElementById("CarInfo")
-const makeModelDisplay = document.getElementById("MakeModel");
 const carDetailDisplay = document.getElementById("CarDetails");
 const searchCarElement = document.getElementById("SearchButton");
 const resultDisplay = document.getElementById("ResultDisplay");
