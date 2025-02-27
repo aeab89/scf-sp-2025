@@ -96,6 +96,7 @@ carSelectorElement.addEventListener("change", (event) => {
 
 searchCarElement.addEventListener("click", (event) => {
     event.preventDefault();
+    carDetailDisplay.innerHTML = "";
     
     let searchValue = document.getElementById("CarInput").value.trim().toLowerCase();
     let foundVehicles = vehicles.filter(vehicle => vehicle.make.toLowerCase() === searchValue);
