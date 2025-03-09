@@ -1,4 +1,4 @@
-/*General Sytle*/
+/*General Style*/
 * {
     box-sizing: border-box;
     margin: 0;
@@ -10,11 +10,11 @@ html, body {
 }
 
 body {
-    background-color: #f3e8ff;
     font-family: Arial, sans-serif;
-    text-align: center;
+    background-color: #f3e8ff;
     display: flex;
     flex-direction: column;
+    text-align: center;
 }
 
 /* Navbar */
