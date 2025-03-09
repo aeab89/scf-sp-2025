@@ -1,3 +1,4 @@
+/* Sticky Navbar */
 const navbar = document.getElementById("makemesticky");
 
 window.addEventListener("scroll", function() {

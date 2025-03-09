@@ -1,3 +1,4 @@
+/*General Sytle*/
 * {
     box-sizing: border-box;
     margin: 0;
@@ -101,6 +102,17 @@ h1 {
 }
 .button:hover{
     background:#d8b4fe;
+}
+
+.about-content > * {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.about-content > *.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* Footer */

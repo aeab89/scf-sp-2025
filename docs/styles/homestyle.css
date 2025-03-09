@@ -1,3 +1,4 @@
+/*General Style*/
 * {
     box-sizing: border-box;
     margin: 0;
@@ -10,9 +11,9 @@ html, body {
 
 body {
     font-family: Arial, sans-serif;
+    background-color: #f3e8ff;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
     text-align: center;
 }
 
@@ -22,10 +23,14 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #f4f4f4;
+    background: #d8b4fe;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 1rem;
     transition: all 0.3s ease-in-out;
+}
+
+.navbar h1 {
+    color: white;
 }
 
 .navbar ul {
@@ -36,11 +41,12 @@ body {
 
 .navbar a {
     text-decoration: none;
-    color: black;
+    color: white;
+    font-weight: bold;
 }
 
 .navbar a:hover {
-    color: #0062ff;
+    color: #6b21a8;
 }
 
 .sticky {
@@ -57,12 +63,16 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: #fff;
+    background: white;
     padding: 2rem;
 }
 
+.hero p, .hero h2 {
+    color: #6b21a8;
+}
+
 .button{
-    background: blue;
+    background: #a855f7;
     color: white;
     padding: 10px 20px;
     text-decoration: none;
@@ -71,7 +81,7 @@ body {
 }
 
 .button:hover {
-    background: darkblue;
+    background:#d8b4fe;
 }
 
 /* Featured Projet */
@@ -84,10 +94,19 @@ body {
     border-radius: 5px;
 }
 
+.featured-project p, .featured-project h3 {
+    color: #6b21a8;
+}
+
+.project-box {
+    color: #6b21a8;
+}
+
 /* Footer */
 .footer {
     margin-top: 2rem;
     padding: 1rem;
-    background: white;
+    color: white;
+    background: #d8b4fe;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }
