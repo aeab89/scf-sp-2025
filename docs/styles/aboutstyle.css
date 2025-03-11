@@ -59,6 +59,7 @@ h1 {
 
 /* About Section */
 .about {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
