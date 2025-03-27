@@ -56,7 +56,8 @@ selectPokemon.addEventListener ("change", (event => {
 
 //Event listener to fetch and display pokemon data when searched by name
 searchPokemon.addEventListener ("click", (event => {
-  const pokemonName = inputPokemon.value.trim(); // Get use input and remove spaces
+  event.preventDefault();
+  const pokemonName = inputPokemon.value.trim().toLowerCase(); // Get user input, remove spaces, and turn to lowercase
   if (pokemonName) {
     GetOnePokemon(pokemonName); //Fetch and display pokemon data
   }
