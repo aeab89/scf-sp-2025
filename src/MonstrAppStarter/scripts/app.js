@@ -1,3 +1,8 @@
+const HomeSelectPanel = document.getElementById("SlotSelect");
+const ChoosePokemonPanel = document.getElementById("ChoosePokemon");
+const Slot1PokemonBtn = document.getElementById("Slot1");
+const Slot2PokemonBtn = document.getElementById("Slot2");
+const BacktoHomeBtn = document.getElementById("backButton");
 const abilitiesUL = document.getElementById("abilities");
 const imageContainer = document.getElementById("image")
 const selectPokemon = document.getElementById("pokemonSelector");
@@ -5,9 +10,35 @@ const searchPokemon = document.getElementById("searchButton");
 const inputPokemon = document.getElementById("pokemonSearchBox");
 const statsContainer = document.createElement("div"); //New container for stats
 statsContainer.id = "statsContainer";
-document.body.appendChild(statsContainer); //Append it to the body
+if(ChoosePokemonPanel) {
+  ChoosePokemonPanel.appendChild(statsContainer);
+} //Appends statsContainer to the ChoosePokemonPanel div
+//document.body.appendChild(statsContainer); //Append it to the body
 
-//Fetches list of pokemon names for the dropdown menu
+
+Slot1PokemonBtn.addEventListener("click", () => {
+  ShowChoicePanel()
+});
+
+Slot2PokemonBtn.addEventListener("click", () => {
+  ShowChoicePanel()
+});
+
+BacktoHomeBtn.addEventListener("click", () => {
+  ShowHomePanel()
+});
+
+function ShowHomePanel () {
+  HomeSelectPanel.style.visibility = 'visible';
+  ChoosePokemonPanel.style.visibility = 'hidden';
+}  
+
+function ShowChoicePanel () {
+  HomeSelectPanel.style.visibility = 'hidden';
+  ChoosePokemonPanel.style.visibility = 'visible';
+} 
+
+//Fetches list of pokemon names for the dropdown menu when page loads
 fetch('https://pokeapi.co/api/v2/pokemon/')
   .then(response => response.json()) //Convert response to JSON
   .then(data => BuildPokemonSelectOptions(data.results)) //Populate dropdown with pokemon names
@@ -23,6 +54,21 @@ function BuildPokemonSelectOptions(pokemonOptions){
   });
 }
 
+//Event listener to fetch and display data when a pokemon is selected
+selectPokemon.addEventListener ("change", (event => {
+  GetOnePokemon(event.target.value);
+}))
+
+//Event listener to fetch and display pokemon data when searched by name
+searchPokemon.addEventListener ("click", (event => {
+  event.preventDefault();
+  const pokemonName = inputPokemon.value.trim().toLowerCase(); // Get user input, remove spaces, and turn to lowercase
+  if (pokemonName) {
+    GetOnePokemon(pokemonName); //Fetch and display pokemon data
+  }
+}
+))
+
 //Function to fetch a pokemon's data based on its name
 function GetOnePokemon(pokemon){
 fetch('https://pokeapi.co/api/v2/pokemon/' + pokemon) //Fetch data from API
@@ -35,7 +81,7 @@ fetch('https://pokeapi.co/api/v2/pokemon/' + pokemon) //Fetch data from API
   .catch(error => console.error('Error:', error)); // Catch and log any errors
 }
 
-//Function to display stats and types for each pokemon
+//Function to build and display stats and types
 function DisplayStatsAndTypes(types, stats) {
   statsContainer.innerHTML = ""; // Clear previous stats
 
@@ -66,7 +112,7 @@ function DisplayStatsAndTypes(types, stats) {
   statsContainer.appendChild(statsList);
 }
 
-//Function to built and display abilities list
+//Function to build and display abilities list
 function BuildAbilitiesList(abilities){
   abilitiesUL.innerHTML = "" //Clear existing list
   abilities.forEach(element => {
@@ -84,17 +130,3 @@ function ShowSelectionImages(sprites){
   imageContainer.appendChild(image); //Append image to container
 }
 
-//Event listener to fetch and display data when a pokemon is selected
-selectPokemon.addEventListener ("change", (event => {
-  GetOnePokemon(event.target.value);
-}))
-
-//Event listener to fetch and display pokemon data when searched by name
-searchPokemon.addEventListener ("click", (event => {
-  event.preventDefault();
-  const pokemonName = inputPokemon.value.trim().toLowerCase(); // Get user input, remove spaces, and turn to lowercase
-  if (pokemonName) {
-    GetOnePokemon(pokemonName); //Fetch and display pokemon data
-  }
-}
-))

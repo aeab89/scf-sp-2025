@@ -3,3 +3,11 @@ h1 {
     color: blue;
     margin: 10px;
 }
+
+#HomeSelect {
+    visibility: visible;
+}
+
+#ChoosePokemon{
+    visibility: hidden;
+}
