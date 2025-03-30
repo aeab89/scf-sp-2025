@@ -4,6 +4,12 @@ const selectPokemon = document.getElementById("pokemonSelector");
 const searchPokemon = document.getElementById("searchButton");
 const inputPokemon = document.getElementById("pokemonSearchBox");
 
+//Fetches list of pokemon names for the dropdown menu
+fetch('https://pokeapi.co/api/v2/pokemon/')
+  .then(response => response.json()) //Convert response to JSON
+  .then(data => BuildPokemonSelectOptions(data.results)) //Populate dropdown with pokemon names
+  .catch(error => console.error('Error:', error)); //Catch and log any errors
+
 //Function to populate dropdown with pokemon names
 function BuildPokemonSelectOptions(pokemonOptions){
   pokemonOptions.forEach(element => {
@@ -13,12 +19,6 @@ function BuildPokemonSelectOptions(pokemonOptions){
       selectPokemon.appendChild(option); //Append option to dropdown
   });
 }
-
-//Fetches list of pokemon names for the dropdown menu
-fetch('https://pokeapi.co/api/v2/pokemon/')
-  .then(response => response.json()) //Convert response to JSON
-  .then(data => BuildPokemonSelectOptions(data.results)) //Populate dropdown with pokemon names
-  .catch(error => console.error('Error:', error)); //Catch and log any errors
 
 //Function to built and display abilities list
 function BuildAbilitiesList(abilities){
