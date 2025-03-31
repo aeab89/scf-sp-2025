@@ -20,70 +20,26 @@ let currentSelection = {};
 let slot1Selection = {};
 let slot2Selection = {};
 
-//Event listeners to toggle between HomeSelectPanel and ChoosePokemonPanel
+//EVENT LISTENERS
+//Show selection panel when a slot is clicked
 Slot1PokemonBtn.addEventListener("click", () => {
   ShowChoicePanel(1)
 });
-
 Slot2PokemonBtn.addEventListener("click", () => {
   ShowChoicePanel(2)
 });
 
+//Show home selection panel when back button is clicked
 BacktoHomeBtn.addEventListener("click", () => {
   ShowHomePanel()
 });
 
-//Function to hide HomeSelectPanel
-function ShowChoicePanel (slotNumber) {
-  currentSlot = slotNumber;
-  HomeSelectPanel.style.visibility = 'hidden';
-  ChoosePokemonPanel.style.visibility = 'visible';
-} 
-
-//Function to hide ChoosePokemonPanel and append sprite to HomeSelect panel
-function ShowHomePanel () {
-  HomeSelectPanel.style.visibility = 'visible';
-  ChoosePokemonPanel.style.visibility = 'hidden';
-  if(currentSlot == 1){
-    if(slot1Selection.sprite){ //appends sprite to slot 1 container after selection is made
-      let img = document.createElement("img");
-      img.src = slot1Selection.sprite;
-      Slot1Container.innerHTML = "";
-      Slot1Container.appendChild(img);
-    }
-  }
-  else if(currentSlot == 2){
-    if(slot2Selection.sprite){ //appends sprite to slot 2 container after selection is made
-      let img = document.createElement("img");
-      img.src = slot2Selection.sprite;
-      Slot2Container.innerHTML = "";
-      Slot2Container.appendChild(img);
-    }
-  }
-}  
-
-//Fetches list of pokemon names for the dropdown menu when page loads
-fetch('https://pokeapi.co/api/v2/pokemon/')
-  .then(response => response.json()) //Convert response to JSON
-  .then(data => BuildPokemonSelectOptions(data.results)) //Populate dropdown with pokemon names
-  .catch(error => console.error('Error:', error)); //Catch and log any errors
-
-//Function to populate dropdown with pokemon names
-function BuildPokemonSelectOptions(pokemonOptions){
-  pokemonOptions.forEach(element => {
-      let option = document.createElement("option"); //Create option element
-      option.innerHTML = element.name; //Set displayed text to pokemon name
-      option.value = element.name; //Set option value to pokemon name
-      selectPokemon.appendChild(option); //Append option to dropdown
-  });
-}
-
-//Event listener to call fetch function when a pokemon is selected
+//Call fetch function when a pokemon is selected
 selectPokemon.addEventListener ("change", (event => {
   GetOnePokemon(event.target.value);
 }))
 
-//Event listener to call fetch function when pokemon is searched by name
+//Call fetch function when pokemon is searched by name
 searchPokemon.addEventListener ("click", (event => {
   event.preventDefault();
   const pokemonName = inputPokemon.value.trim().toLowerCase(); // Get user input, remove spaces, and turn to lowercase
@@ -93,12 +49,66 @@ searchPokemon.addEventListener ("click", (event => {
 }
 ))
 
-//Event listener to store current selection in slot 1
+//Store current selection in chosen slot when clicking select button
 SelectButton.addEventListener("click", () => {
-  slot1Selection = currentSelection;
-  slot2Selection = currentSelection;
+  if (currentSlot === 1) {
+    slot1Selection = { ...currentSelection };
+  } else if (currentSlot === 2) {
+    slot2Selection = { ...currentSelection };
+  }
   ShowHomePanel();
 })
+
+
+//PANEL TOGGLING FUNCTIONS
+//Show pokemon selection panel only
+function ShowChoicePanel (slotNumber) {
+  currentSlot = slotNumber;
+  HomeSelectPanel.style.visibility = 'hidden';
+  ChoosePokemonPanel.style.visibility = 'visible';
+} 
+
+//Show home panel only and display selected pokemon sprite
+function ShowHomePanel () {
+  HomeSelectPanel.style.visibility = 'visible';
+  ChoosePokemonPanel.style.visibility = 'hidden';
+  if(currentSlot == 1){
+    if(slot1Selection.sprite){ //Append sprite to slot 1 container after selection is made
+      let img = document.createElement("img");
+      img.src = slot1Selection.sprite;
+      Slot1Container.innerHTML = "";
+      Slot1Container.appendChild(img);
+    }
+  }
+  else if(currentSlot == 2){
+    if(slot2Selection.sprite){ //Append sprite to slot 2 container after selection is made
+      let img = document.createElement("img");
+      img.src = slot2Selection.sprite;
+      Slot2Container.innerHTML = "";
+      Slot2Container.appendChild(img);
+    }
+  }
+}  
+
+
+//ASYNCHRONOUS FETCH REQUEST
+//Fetch list of pokemon names for the dropdown list on page load
+fetch('https://pokeapi.co/api/v2/pokemon/')
+  .then(response => response.json()) //Convert response to JSON
+  .then(data => BuildPokemonSelectOptions(data.results)) //Populate dropdown with pokemon names
+  .catch(error => console.error('Error:', error)); //Catch and log any errors
+
+  
+//HELPER FUNCTIONS
+//Function to populate dropdown with pokemon names
+function BuildPokemonSelectOptions(pokemonOptions){
+  pokemonOptions.forEach(element => {
+      let option = document.createElement("option"); //Create option element
+      option.innerHTML = element.name; //Set displayed text to pokemon name
+      option.value = element.name; //Set option value to pokemon name
+      selectPokemon.appendChild(option); //Append option to dropdown
+  });
+}
 
 //Function to fetch a pokemon's data based on its name
 function GetOnePokemon(pokemon){
@@ -160,7 +170,7 @@ function DisplayStatsAndTypes(types, stats) {
   statsContainer.appendChild(statsList);
 }
 
-//Function to build and display abilities list
+/*Function to build and display abilities list
 function BuildAbilitiesList(abilities){
   abilitiesUL.innerHTML = "" //Clear existing list
   abilities.forEach(element => {
@@ -168,5 +178,5 @@ function BuildAbilitiesList(abilities){
   li.innerHTML = element.ability.name; //Set list item text to ability name
   abilitiesUL.appendChild(li); //Append list item to UL
   });
-}
+}*/
 
