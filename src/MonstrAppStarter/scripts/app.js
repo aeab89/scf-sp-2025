@@ -20,7 +20,7 @@ let currentSelection = {};
 let slot1Selection = {};
 let slot2Selection = {};
 
-//EVENT LISTENERS
+// ----------------------EVENT LISTENERS----------------------
 //Show selection panel when a slot is clicked
 Slot1PokemonBtn.addEventListener("click", () => {
   ShowChoicePanel(1)
@@ -60,18 +60,24 @@ SelectButton.addEventListener("click", () => {
 })
 
 
-//PANEL TOGGLING FUNCTIONS
+// ----------------------PANEL TOGGLING FUNCTIONS----------------------
 //Show pokemon selection panel only
 function ShowChoicePanel (slotNumber) {
   currentSlot = slotNumber;
   HomeSelectPanel.style.visibility = 'hidden';
+  HomeSelectPanel.style.display = 'none';
   ChoosePokemonPanel.style.visibility = 'visible';
+ ChoosePokemonPanel.style.display = 'block';
+
+ 
 } 
 
 //Show home panel only and display selected pokemon sprite
 function ShowHomePanel () {
   HomeSelectPanel.style.visibility = 'visible';
+  HomeSelectPanel.style.display = 'block';
   ChoosePokemonPanel.style.visibility = 'hidden';
+  ChoosePokemonPanel.style.display = 'none';
   if(currentSlot == 1){
     if(slot1Selection.sprite){ //Append sprite to slot 1 container after selection is made
       let img = document.createElement("img");
@@ -91,15 +97,15 @@ function ShowHomePanel () {
 }  
 
 
-//ASYNCHRONOUS FETCH REQUEST
+// ----------------------ASYNCHRONOUS FETCH REQUEST----------------------
 //Fetch list of pokemon names for the dropdown list on page load
 fetch('https://pokeapi.co/api/v2/pokemon/')
   .then(response => response.json()) //Convert response to JSON
   .then(data => BuildPokemonSelectOptions(data.results)) //Populate dropdown with pokemon names
   .catch(error => console.error('Error:', error)); //Catch and log any errors
 
-  
-//HELPER FUNCTIONS
+
+// ----------------------HELPER FUNCTIONS----------------------
 //Function to populate dropdown with pokemon names
 function BuildPokemonSelectOptions(pokemonOptions){
   pokemonOptions.forEach(element => {

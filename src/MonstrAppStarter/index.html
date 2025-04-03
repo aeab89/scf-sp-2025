@@ -10,42 +10,47 @@
     <title>Monster Fighting App</title>
 </head>
 <body>
-    <div class="app=container">
-       <!-- Home screen for our SPA -->
-    <div id="SlotSelect" class="container-fluid p-5 bg-primary text-white text-center">
-        <h1>Monster Fight!</h1>
-        <p>Choose monsters and see them fight.</p>
-        <button id="Slot1" class="btn btn-primary">Slot 1</button>
-        <div id="Slot1Selection"></div>
-        <button id="Slot2" class="btn btn-primary">Slot 2</button>
-        <div id="Slot2Selection"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col border border-4 rounded-3">
+            <!-- Home screen for our SPA -->
+            <div id="SlotSelect" class="app-panel">
+                <h1>Monster Fight!</h1>
+                <p>Choose monsters and see them fight.</p>
+                <button id="Slot1" class="btn btn-primary">Slot 1</button>
+                <div id="Slot1Selection"></div>
+                <button id="Slot2" class="btn btn-primary">Slot 2</button>
+                <div id="Slot2Selection"></div>
+            </div>
+
+            <!-- Pokemon select screen for our SPA -->
+            <div id="ChoosePokemon" class="app-panel">
+                <form>
+                    <label for="pokemonSelector">Pick your Pokemon!</label>
+                    <select name="pokemonSelector" id="pokemonSelector">
+                        
+                    </select>
+                    <label for="pokemonSearchBox"></label>
+                    <input type="text" name="pokemonSearchBox" id="pokemonSearchBox">
+                    <button id="searchButton">Search</button>
+                </form>
+
+                <ul id="abilities">
+
+                </ul>
+
+                <div id="image">
+
+                </div>
+
+                <button id="backButton" class="btn btn-primary">Back to Home</button>
+                <button id="selectButton" class="btn btn-primary">Select</button>
+            </div>
+            </div>
+            <div class="col"></div>
+        </div> 
     </div>
-
-    <!-- Pokemon select screen for our SPA -->
-    <div id="ChoosePokemon">
-        <form>
-            <label for="pokemonSelector">Pick your Pokemon!</label>
-            <select name="pokemonSelector" id="pokemonSelector">
-                
-            </select>
-            <label for="pokemonSearchBox"></label>
-            <input type="text" name="pokemonSearchBox" id="pokemonSearchBox">
-            <button id="searchButton">Search</button>
-        </form>
-
-        <ul id="abilities">
-
-        </ul>
-
-        <div id="image">
-
-        </div>
-
-        <button id="backButton" class="btn btn-primary">Back to Home</button>
-        <button id="selectButton" class="btn btn-primary">Select</button>
-     </div> 
-    </div>
-    
     <script type="text/javascript" src="scripts/app.js"></script>
 </body>
 </html>
